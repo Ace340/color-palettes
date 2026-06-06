@@ -5,10 +5,10 @@ import { getPaletteContrasts, type ContrastLevel } from "@/lib/color";
 import { Badge } from "@/components/ui/badge";
 
 const LEVEL_COLORS: Record<ContrastLevel, string> = {
-  AAA: "bg-green-500/20 text-green-400 border-green-500/30",
-  AA: "bg-green-500/20 text-green-400 border-green-500/30",
-  A: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-  fail: "bg-red-500/20 text-red-400 border-red-500/30",
+  AAA: "bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/30",
+  AA: "bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/30",
+  A: "bg-yellow-500/15 text-yellow-700 dark:text-yellow-400 border-yellow-500/30",
+  fail: "bg-red-500/15 text-red-700 dark:text-red-400 border-red-500/30",
 };
 
 const PAIR_LABELS: Record<number, string> = {

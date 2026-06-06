@@ -1,59 +1,87 @@
 "use client";
 
 import { PaletteProvider, usePalette } from "@/hooks/use-palette";
+import { Navbar } from "@/components/layout/navbar";
+import { Hero } from "@/components/layout/hero";
 import { PaletteSwatches } from "@/components/palette/palette-swatches";
 import { HarmonyControls } from "@/components/palette/harmony-controls";
 import { AiMoodInput } from "@/components/palette/ai-mood-input";
 import { ContrastBadges } from "@/components/palette/contrast-badges";
 import { LivePreview } from "@/components/palette/live-preview";
-import { ExportPanel } from "@/components/panels/export-panel";
-import { ExtractPanel } from "@/components/panels/extract-panel";
-import { HistoryPanel } from "@/components/panels/history-panel";
-import { Separator } from "@/components/ui/separator";
 
 function PaletteEditor() {
   const { palette, setRoleColor } = usePalette();
 
   return (
-    <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-8 flex flex-col gap-8">
-      {/* Header */}
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Color Palettes</h1>
-          <p className="text-sm text-muted-foreground">
-            Create, generate, and export beautiful color palettes
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <HistoryPanel />
-          <ExtractPanel />
-          <ExportPanel />
-        </div>
-      </header>
+    <>
+      <Navbar />
 
-      <Separator />
+      <main className="flex-1">
+        <Hero />
 
-      {/* Palette Swatches */}
-      <section>
-        <PaletteSwatches palette={palette} onColorChange={setRoleColor} />
-      </section>
+        {/* Generator Section */}
+        <section id="generator" className="py-16 md:py-20">
+          <div className="max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                Palette Generator
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Pick colors for each role, or generate from harmony and AI below
+              </p>
+            </div>
+            <PaletteSwatches palette={palette} onColorChange={setRoleColor} />
+            <ContrastBadges />
+          </div>
+        </section>
 
-      <Separator />
+        {/* Harmony Section */}
+        <section id="harmony" className="py-16 md:py-20">
+          <div className="max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                Harmony
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Generate a complete palette from your primary color using color
+                theory
+              </p>
+            </div>
+            <HarmonyControls />
+          </div>
+        </section>
 
-      {/* Creation Tools */}
-      <section className="flex flex-col gap-6">
-        <HarmonyControls />
-        <AiMoodInput />
-      </section>
+        {/* AI Generator Section */}
+        <section id="ai" className="py-16 md:py-20">
+          <div className="max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                AI Generator
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Describe a mood in natural language and let AI craft your palette
+              </p>
+            </div>
+            <AiMoodInput />
+          </div>
+        </section>
 
-      <Separator />
-
-      {/* Contrast Info */}
-      <ContrastBadges />
-
-      {/* Live Preview */}
-      <LivePreview />
-    </main>
+        {/* Live Preview Section */}
+        <section id="preview" className="py-16 md:py-20">
+          <div className="max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                Live Preview
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                See your palette in a real UI context
+              </p>
+            </div>
+            <LivePreview />
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
 

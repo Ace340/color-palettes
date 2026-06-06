@@ -43,9 +43,9 @@ Export a palette in multiple formats (CSS Variables, Tailwind Config, JSON, URL)
 
 ## Application Structure
 
-Single-page application on `/`. The palette editor is the app — harmony controls, AI generation, and color adjustment live in the main view. Image upload, export, and saved palette history are accessed via slide-in panels (Shadcn Sheet). URL changes only for sharing (`?p=...`).
+Single-page application on `/`. The page has a sticky Navbar with jump links, a Hero section, and four content sections (Generator, Harmony, AI Generator, Live Preview) stacked vertically with generous spacing. Image extraction, export, and saved palette history are accessed via slide-in panels (Shadcn Sheet) triggered from the Navbar. URL changes only for sharing (`?p=...`).
 
-The app UI uses a fixed dark theme (Shadcn dark mode). Palette colors appear only in the swatches and the live preview panel — the app chrome stays neutral and readable regardless of the palette being edited.
+The app UI defaults to light mode (slightly off-white background) with a dark mode toggle in the Navbar. On mobile, the Navbar collapses into a hamburger menu. Palette colors appear only in the swatches and the live preview panel — the app chrome stays neutral and readable regardless of the palette being edited.
 
 ### AI Mood Generation
 Users describe a mood in natural language. The prompt sent to Gemini includes role semantics (e.g., "background should be low-saturation and high-lightness, accent should be the most vivid"). Gemini is instructed to return structured JSON mapping roles to hex values. The server action validates the response with Zod, retries once on failure, and returns a graceful error if it still fails.
