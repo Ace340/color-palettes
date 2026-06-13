@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { usePalette } from "@/hooks/use-palette";
 
 export function Hero() {
-  const { palette, surpriseMe, undoSurprise, canUndo } = usePalette();
+  const { palette, surpriseMe } = usePalette();
 
   return (
     <section className="py-20 pb-8 md:py-24 md:pb-12">
@@ -20,24 +20,14 @@ export function Hero() {
             Discover harmonious palettes with AI, color theory, and live
             previews. Export anywhere in one click.
           </p>
-          <div className="flex justify-center md:justify-start gap-3">
+          <div className="flex justify-center md:justify-start">
             <Button
               size="lg"
-              className="btn-surprise text-lg px-8 py-6 h-auto rounded-xl"
+              className="btn-surprise text-lg px-10 py-6 h-auto rounded-xl min-w-[220px]"
               onClick={surpriseMe}
             >
               Surprise Me
             </Button>
-            {canUndo && (
-              <Button
-                variant="ghost"
-                size="lg"
-                className="text-base text-muted-foreground animate-in fade-in duration-300"
-                onClick={undoSurprise}
-              >
-                Undo
-              </Button>
-            )}
           </div>
         </div>
 

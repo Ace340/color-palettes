@@ -11,7 +11,7 @@ import { LivePreview } from "@/components/palette/live-preview";
 import { Button } from "@/components/ui/button";
 
 function PaletteEditor() {
-  const { palette, setRoleColor, surpriseMe, undoSurprise, canUndo } = usePalette();
+  const { palette, setRoleColor, undoSurprise, canUndo } = usePalette();
 
   return (
     <>
@@ -33,9 +33,6 @@ function PaletteEditor() {
                 </p>
               </div>
               <div className="flex gap-2">
-                <Button size="default" className="btn-surprise rounded-xl" onClick={surpriseMe}>
-                  Surprise Me
-                </Button>
                 {canUndo && (
                   <Button
                     variant="ghost"
