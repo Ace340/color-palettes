@@ -16,6 +16,7 @@ import {
   savePalette,
   deletePalette,
 } from "@/lib/palette-storage";
+import { generateSurprise } from "@/lib/color";
 import { encodePaletteToUrl, decodePaletteFromUrl } from "@/lib/url-encoding";
 
 interface PaletteState {
@@ -27,6 +28,9 @@ interface PaletteState {
   remove: (id: string) => void;
   loadSaved: (palette: Palette) => void;
   shareUrl: string;
+  surpriseMe: () => void;
+  undoSurprise: () => void;
+  canUndo: boolean;
 }
 
 const PaletteContext = createContext<PaletteState | null>(null);
@@ -42,6 +46,7 @@ export function usePalette(): PaletteState {
 export function PaletteProvider({ children }: { children: ReactNode }) {
   const [palette, setPaletteState] = useState<Palette>(DEFAULT_PALETTE);
   const [savedPalettes, setSavedPalettes] = useState<SavedPalette[]>([]);
+  const [previousPalette, setPreviousPalette] = useState<Palette | null>(null);
 
   // Initialize from URL or default on mount
   useEffect(() => {
@@ -82,6 +87,19 @@ export function PaletteProvider({ children }: { children: ReactNode }) {
     setPaletteState(saved);
   }, []);
 
+  const surpriseMe = useCallback(() => {
+    const isDark = typeof document !== "undefined" && document.documentElement.classList.contains("dark");
+    setPreviousPalette(palette);
+    setPaletteState(generateSurprise(isDark));
+  }, [palette]);
+
+  const undoSurprise = useCallback(() => {
+    if (previousPalette) {
+      setPaletteState(previousPalette);
+      setPreviousPalette(null);
+    }
+  }, [previousPalette]);
+
   const shareUrl =
     typeof window !== "undefined"
       ? `${window.location.origin}${encodePaletteToUrl(palette)}`
@@ -98,6 +116,9 @@ export function PaletteProvider({ children }: { children: ReactNode }) {
         remove,
         loadSaved,
         shareUrl,
+        surpriseMe,
+        undoSurprise,
+        canUndo: previousPalette !== null,
       }}
     >
       {children}

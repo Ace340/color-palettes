@@ -1,9 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
+import { usePalette } from "@/hooks/use-palette";
 
 export function Hero() {
+  const { palette, surpriseMe, undoSurprise, canUndo } = usePalette();
+
   return (
-    <section className="py-20 md:py-24">
+    <section className="py-20 pb-8 md:py-24 md:pb-12">
       <div className="max-w-6xl mx-auto w-full px-4 flex flex-col md:flex-row items-center gap-12 md:gap-16">
         {/* Left: Text */}
         <div className="flex-1 flex flex-col gap-6 text-center md:text-left">
@@ -13,26 +17,51 @@ export function Hero() {
             Color Palettes
           </h1>
           <p className="text-lg text-muted-foreground max-w-lg mx-auto md:mx-0">
-            Design harmonious palettes with AI, color theory, and live
+            Discover harmonious palettes with AI, color theory, and live
             previews. Export anywhere in one click.
           </p>
-          <div className="flex justify-center md:justify-start">
-            <a href="#generator">
-              <Button size="lg" className="gap-2 text-base">
-                Get Started
-                <ArrowDown className="w-4 h-4" />
+          <div className="flex justify-center md:justify-start gap-3">
+            <Button
+              size="lg"
+              className="btn-surprise text-lg px-8 py-6 h-auto rounded-xl"
+              onClick={surpriseMe}
+            >
+              Surprise Me
+            </Button>
+            {canUndo && (
+              <Button
+                variant="ghost"
+                size="lg"
+                className="text-base text-muted-foreground animate-in fade-in duration-300"
+                onClick={undoSurprise}
+              >
+                Undo
               </Button>
-            </a>
+            )}
           </div>
         </div>
 
-        {/* Right: Gradient blob */}
+        {/* Right: Gradient blob — driven by identity colors */}
         <div className="flex-1 w-full max-w-md md:max-w-none aspect-square md:aspect-[4/3] relative rounded-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-90" />
-          <div className="absolute top-[15%] left-[10%] w-[45%] h-[45%] rounded-full bg-amber-400/60 blur-2xl" />
-          <div className="absolute bottom-[10%] right-[15%] w-[40%] h-[40%] rounded-full bg-teal-400/50 blur-2xl" />
-          <div className="absolute top-[40%] left-[35%] w-[35%] h-[35%] rounded-full bg-rose-400/40 blur-xl" />
-          <div className="absolute top-[5%] right-[10%] w-[25%] h-[25%] rounded-full bg-sky-300/50 blur-xl" />
+          <div
+            className="absolute inset-0 transition-colors duration-300 ease-out"
+            style={{
+              background: `linear-gradient(to bottom right, ${palette.primary}, ${palette.secondary}, ${palette.accent})`,
+              opacity: 0.9,
+            }}
+          />
+          <div
+            className="absolute top-[15%] left-[10%] w-[45%] h-[45%] rounded-full blur-2xl transition-colors duration-300 ease-out"
+            style={{ backgroundColor: palette.primary, opacity: 0.6 }}
+          />
+          <div
+            className="absolute bottom-[10%] right-[15%] w-[40%] h-[40%] rounded-full blur-2xl transition-colors duration-300 ease-out"
+            style={{ backgroundColor: palette.secondary, opacity: 0.5 }}
+          />
+          <div
+            className="absolute top-[40%] left-[35%] w-[35%] h-[35%] rounded-full blur-xl transition-colors duration-300 ease-out"
+            style={{ backgroundColor: palette.accent, opacity: 0.4 }}
+          />
         </div>
       </div>
     </section>

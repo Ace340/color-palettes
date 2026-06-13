@@ -79,20 +79,6 @@ function generateIdentityColors(
   }
 }
 
-function generateFoundationColors(base: chroma.Color): string[] {
-  // Background: very low saturation, very high lightness
-  const background = chroma
-    .hsl(base.hsl()[0], 0.05, 0.97)
-    .hex();
-
-  // Surface: slightly lower lightness than background
-  const surface = chroma
-    .hsl(base.hsl()[0], 0.08, 0.93)
-    .hex();
-
-  return [background, surface];
-}
-
 // --- Contrast Checking ---
 
 export function getContrastRatio(color1: string, color2: string): number {
@@ -216,6 +202,68 @@ export function smartMapToPalette(colors: string[]): Palette {
     background: chromaColors[bgIdx].hex,
     surface: chromaColors[surfaceIdx].hex,
   };
+}
+
+// --- Surprise Me Generation ---
+
+const SURPRISE_MODE_WEIGHTS: [HarmonyMode, number][] = [
+  ["triadic", 3],
+  ["complementary", 3],
+  ["split-complementary", 3],
+  ["tetradic", 2],
+  ["analogous", 2],
+  ["monochromatic", 1],
+];
+
+function pickWeightedMode(): HarmonyMode {
+  const totalWeight = SURPRISE_MODE_WEIGHTS.reduce((sum, [, w]) => sum + w, 0);
+  let roll = Math.random() * totalWeight;
+
+  for (const [mode, weight] of SURPRISE_MODE_WEIGHTS) {
+    roll -= weight;
+    if (roll <= 0) return mode;
+  }
+
+  return SURPRISE_MODE_WEIGHTS[0][0];
+}
+
+export function generateSurprise(isDark: boolean): Palette {
+  const hue = Math.random() * 360;
+  const saturation = 0.6 + Math.random() * 0.4; // 60–100%
+  const lightness = 0.4 + Math.random() * 0.25;  // 40–65%
+
+  const base = chroma.hsl(hue, saturation, lightness);
+  const mode = pickWeightedMode();
+  const identityColors = generateIdentityColors(base, mode);
+  const foundationColors = generateFoundationColors(base, isDark);
+
+  const palette: Partial<Palette> = {};
+
+  IDENTITY_ROLES.forEach((role, i) => {
+    palette[role] = identityColors[i] || base.hex();
+  });
+
+  FOUNDATION_ROLES.forEach((role, i) => {
+    palette[role] = foundationColors[i];
+  });
+
+  return palette as Palette;
+}
+
+function generateFoundationColors(base: chroma.Color, isDark = false): string[] {
+  const [h] = base.hsl();
+
+  if (isDark) {
+    return [
+      chroma.hsl(h, 0.05, 0.08).hex(),
+      chroma.hsl(h, 0.08, 0.12).hex(),
+    ];
+  }
+
+  return [
+    chroma.hsl(h, 0.05, 0.97).hex(),
+    chroma.hsl(h, 0.08, 0.93).hex(),
+  ];
 }
 
 // --- Role Labels ---

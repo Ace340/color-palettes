@@ -8,9 +8,10 @@ import { HarmonyControls } from "@/components/palette/harmony-controls";
 import { AiMoodInput } from "@/components/palette/ai-mood-input";
 import { ContrastBadges } from "@/components/palette/contrast-badges";
 import { LivePreview } from "@/components/palette/live-preview";
+import { Button } from "@/components/ui/button";
 
 function PaletteEditor() {
-  const { palette, setRoleColor } = usePalette();
+  const { palette, setRoleColor, surpriseMe, undoSurprise, canUndo } = usePalette();
 
   return (
     <>
@@ -20,15 +21,32 @@ function PaletteEditor() {
         <Hero />
 
         {/* Generator Section */}
-        <section id="generator" className="py-16 md:py-20">
+        <section id="generator" className="pt-8 pb-16 md:pt-12 md:pb-20">
           <div className="max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-                Palette Generator
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                Pick colors for each role, or generate from harmony and AI below
-              </p>
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                  Palette Generator
+                </h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Pick colors for each role, or generate from harmony and AI below
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <Button size="default" className="btn-surprise rounded-xl" onClick={surpriseMe}>
+                  Surprise Me
+                </Button>
+                {canUndo && (
+                  <Button
+                    variant="ghost"
+                    size="default"
+                    className="text-muted-foreground animate-in fade-in duration-300"
+                    onClick={undoSurprise}
+                  >
+                    Undo
+                  </Button>
+                )}
+              </div>
             </div>
             <PaletteSwatches palette={palette} onColorChange={setRoleColor} />
             <ContrastBadges />
