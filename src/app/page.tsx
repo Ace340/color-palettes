@@ -7,6 +7,7 @@ import { GeneratorSection } from "@/components/sections/generator-section";
 import { HarmonySection } from "@/components/sections/harmony-section";
 import { AiSection } from "@/components/sections/ai-section";
 import { PreviewSection } from "@/components/sections/preview-section";
+import { Footer } from "@/components/layout/footer";
 
 function PaletteEditor() {
   return (
@@ -20,6 +21,8 @@ function PaletteEditor() {
         <AiSection />
         <PreviewSection />
       </main>
+
+      <Footer />
     </>
   );
 }

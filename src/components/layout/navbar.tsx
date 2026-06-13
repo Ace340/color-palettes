@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
@@ -28,7 +29,14 @@ export function Navbar() {
       <nav className="max-w-6xl mx-auto w-full px-4 h-16 flex items-center justify-between">
         {/* Logo + Brand */}
         <div className="flex items-center gap-2 shrink-0">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 via-purple-500 to-amber-400" />
+          <Image
+            src="/Chrom.svg"
+            alt="Color Palettes logo"
+            width={32}
+            height={32}
+            className="rounded-lg"
+            priority
+          />
           <span className="text-lg font-bold tracking-tight text-foreground">
             Color Palettes
           </span>

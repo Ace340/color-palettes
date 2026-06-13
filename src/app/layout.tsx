@@ -37,7 +37,7 @@ export default function RootLayout({
       className={`${cabinetGrotesk.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
         <ThemeProvider>
           <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
