@@ -26,20 +26,16 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
-      <nav className="max-w-6xl mx-auto w-full px-4 h-16 flex items-center justify-between">
+      <nav className="page-container h-20 flex items-center justify-between">
         {/* Logo + Brand */}
         <div className="flex items-center gap-2 shrink-0">
           <Image
-            src="/Chrom.svg"
+            src="/Chrom-letters.png"
             alt="Color Palettes logo"
-            width={32}
-            height={32}
-            className="rounded-lg"
+            width={200}
+            height={49}
             priority
           />
-          <span className="text-lg font-bold tracking-tight text-foreground">
-            Color Palettes
-          </span>
         </div>
 
         {/* Center Nav Links — desktop only */}
@@ -106,7 +102,7 @@ export function Navbar() {
       {/* Mobile dropdown menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-md">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3">
+          <div className="page-container py-4 flex flex-col gap-3">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}

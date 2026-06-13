@@ -27,7 +27,7 @@ export function Section({
 }: SectionProps) {
   return (
     <section id={id} className={className}>
-      <div className="max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
+      <div className="page-container flex flex-col gap-8">
         {headerActions ? (
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>

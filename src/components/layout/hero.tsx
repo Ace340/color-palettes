@@ -8,7 +8,7 @@ export function Hero() {
 
   return (
     <section className="py-20 pb-8 md:py-24 md:pb-12">
-      <div className="max-w-6xl mx-auto w-full px-4 flex flex-col md:flex-row items-center gap-12 md:gap-16">
+      <div className="page-container flex flex-col md:flex-row items-center gap-12 md:gap-16">
         {/* Left: Text */}
         <div className="flex-1 flex flex-col gap-6 text-center md:text-left">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
