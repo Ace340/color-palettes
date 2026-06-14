@@ -1,0 +1,121 @@
+{
+  "Metadata": {
+    "title": "Color Palettes",
+    "description": "Crea hermosas paletas de colores con IA, armonías y extracción de imágenes"
+  },
+  "Navbar": {
+    "nav": {
+      "generator": "Generador",
+      "harmony": "Armonía",
+      "ai": "IA",
+      "preview": "Vista previa"
+    },
+    "toggleTheme": "Cambiar tema",
+    "toggleMenu": "Cambiar menú",
+    "language": "Idioma",
+    "switchToEnglish": "Cambiar a inglés",
+    "switchToSpanish": "Cambiar a español"
+  },
+  "Hero": {
+    "titleLine1": "Crea hermosas",
+    "titleLine2": "paletas de colores",
+    "subtitle": "Descubre paletas armoniosas con IA, teoría del color y vistas en vivo. Exporta a cualquier lugar con un clic.",
+    "surpriseMe": "Sorpréndeme"
+  },
+  "GeneratorSection": {
+    "title": "Generador de paletas",
+    "description": "Elige colores para cada rol, o genera con armonía e IA a continuación",
+    "undo": "Deshacer"
+  },
+  "HarmonySection": {
+    "title": "Armonía",
+    "description": "Genera una paleta completa a partir de tu color primario usando teoría del color"
+  },
+  "HarmonyControls": {
+    "heading": "Armonía",
+    "generateFrom": "Generar desde el color {role}",
+    "modes": {
+      "complementary": "Complementario",
+      "analogous": "Análogo",
+      "triadic": "Triádico",
+      "split-complementary": "Complementario dividido",
+      "tetradic": "Tetrádico",
+      "monochromatic": "Monocromático"
+    }
+  },
+  "AiSection": {
+    "title": "Generador IA",
+    "description": "Describe un estado de ánimo en lenguaje natural y deja que la IA cree tu paleta"
+  },
+  "AiMoodInput": {
+    "heading": "Generador de estados de ánimo IA",
+    "placeholder": "Describe un estado de ánimo... (p. ej., atardecer cálido, Tokio cyberpunk)",
+    "generate": "Generar",
+    "errors": {
+      "NOT_CONFIGURED": "La generación con IA no está configurada.",
+      "INVALID_FORMAT": "La IA devolvió un formato de paleta no válido.",
+      "EMPTY_MOOD": "Por favor, describe un estado de ánimo.",
+      "GENERIC": "Algo salió mal. Inténtalo de nuevo."
+    }
+  },
+  "PreviewSection": {
+    "title": "Vista previa en vivo",
+    "description": "Ve tu paleta en un contexto de interfaz real"
+  },
+  "LivePreview": {
+    "heading": "Vista previa en vivo",
+    "mockDashboardOverview": "Resumen del panel",
+    "mockSubtitle": "Tus métricas clave de un vistazo",
+    "mockViewReports": "Ver informes",
+    "mockSettings": "Ajustes",
+    "metricRevenue": "Ingresos",
+    "metricUsers": "Usuarios",
+    "metricGrowth": "Crecimiento"
+  },
+  "ContrastBadges": {
+    "heading": "Contraste",
+    "pairLabels": {
+      "primaryBackground": "Primario / Fondo",
+      "accentBackground": "Acento / Fondo",
+      "textSurface": "Texto / Superficie"
+    }
+  },
+  "ExportPanel": {
+    "trigger": "Exportar",
+    "title": "Exportar paleta",
+    "shareUrl": "Compartir URL",
+    "copy": "Copiar",
+    "download": "Descargar",
+    "formats": {
+      "css": "Variables CSS",
+      "tailwind": "Tailwind",
+      "json": "JSON"
+    }
+  },
+  "ExtractPanel": {
+    "trigger": "Extraer",
+    "title": "Extraer de imagen",
+    "description": "Sube una imagen para extraer una paleta de sus colores dominantes.",
+    "chooseImage": "Elegir imagen",
+    "extracting": "Extrayendo...",
+    "previewAlt": "Vista previa de la imagen subida"
+  },
+  "HistoryPanel": {
+    "trigger": "Guardadas",
+    "title": "Paletas guardadas",
+    "saveCurrent": "Guardar paleta actual",
+    "empty": "Aún no hay paletas guardadas.",
+    "deleteAria": "Eliminar paleta guardada"
+  },
+  "Roles": {
+    "primary": "Primario",
+    "secondary": "Secundario",
+    "accent": "Acento",
+    "background": "Fondo",
+    "surface": "Superficie",
+    "editColor": "Editar color {role}"
+  },
+  "Common": {
+    "close": "Cerrar"
+  }
+}

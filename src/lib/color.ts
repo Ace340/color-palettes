@@ -266,17 +266,10 @@ function generateFoundationColors(base: chroma.Color, isDark = false): string[] 
   ];
 }
 
-// --- Role Labels ---
-
-export const ROLE_LABELS: Record<PaletteRole, string> = {
-  primary: "Primary",
-  secondary: "Secondary",
-  accent: "Accent",
-  background: "Background",
-  surface: "Surface",
-};
-
 // --- Palette Keys in order ---
+// NOTE: role *display labels* are translated via the `Roles` message namespace
+// (next-intl). There is no static English label map here on purpose — display
+// text must not live in lib code.
 
 export function getRoleOrder(): PaletteRole[] {
   return [...PALETTE_ROLES];

@@ -2,21 +2,25 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { HistoryPanel } from "@/components/panels/history-panel";
 import { ExtractPanel } from "@/components/panels/extract-panel";
 import { ExportPanel } from "@/components/panels/export-panel";
+import { LanguageToggle } from "@/components/layout/language-toggle";
 import { Sun, Moon, Menu, X } from "lucide-react";
 
+// hrefs are in-page anchors (not locale routes); labels come from Navbar.nav.*
 const NAV_LINKS = [
-  { label: "Generator", href: "#generator" },
-  { label: "Harmony", href: "#harmony" },
-  { label: "AI", href: "#ai" },
-  { label: "Preview", href: "#preview" },
+  { labelKey: "generator", href: "#generator" },
+  { labelKey: "harmony", href: "#harmony" },
+  { labelKey: "ai", href: "#ai" },
+  { labelKey: "preview", href: "#preview" },
 ] as const;
 
 export function Navbar() {
+  const t = useTranslations("Navbar");
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -46,18 +50,19 @@ export function Navbar() {
               href={link.href}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              {link.label}
+              {t(`nav.${link.labelKey}`)}
             </a>
           ))}
         </div>
 
         {/* Right Actions — desktop */}
         <div className="hidden md:flex items-center gap-2">
+          <LanguageToggle />
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleTheme}
-            aria-label="Toggle theme"
+            aria-label={t("toggleTheme")}
           >
             {theme === "light" ? (
               <Moon className="w-4 h-4" />
@@ -72,11 +77,12 @@ export function Navbar() {
 
         {/* Mobile: hamburger + theme toggle */}
         <div className="flex md:hidden items-center gap-2">
+          <LanguageToggle />
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleTheme}
-            aria-label="Toggle theme"
+            aria-label={t("toggleTheme")}
           >
             {theme === "light" ? (
               <Moon className="w-4 h-4" />
@@ -88,7 +94,7 @@ export function Navbar() {
             variant="ghost"
             size="icon"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={t("toggleMenu")}
           >
             {mobileOpen ? (
               <X className="w-5 h-5" />
@@ -110,7 +116,7 @@ export function Navbar() {
                 onClick={handleLinkClick}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-1"
               >
-                {link.label}
+                {t(`nav.${link.labelKey}`)}
               </a>
             ))}
             <div className="flex items-center gap-2 pt-2 border-t border-border/50">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { usePalette } from "@/hooks/use-palette";
 import {
   formatExport,
@@ -19,13 +20,15 @@ import {
 } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Download, Copy, Check, Share2 } from "lucide-react";
-const FORMATS: { key: ExportFormat; label: string }[] = [
-  { key: "css", label: "CSS Variables" },
-  { key: "tailwind", label: "Tailwind" },
-  { key: "json", label: "JSON" },
+
+const FORMATS: { key: ExportFormat; labelKey: "css" | "tailwind" | "json" }[] = [
+  { key: "css", labelKey: "css" },
+  { key: "tailwind", labelKey: "tailwind" },
+  { key: "json", labelKey: "json" },
 ];
 
 export function ExportPanel() {
+  const t = useTranslations("ExportPanel");
   const { palette, shareUrl } = usePalette();
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -53,18 +56,18 @@ export function ExportPanel() {
         className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 cursor-pointer"
       >
         <Download className="w-4 h-4 mr-1" />
-        Export
+        {t("trigger")}
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Export Palette</SheetTitle>
+          <SheetTitle>{t("title")}</SheetTitle>
         </SheetHeader>
         <div className="mt-6 flex flex-col gap-4">
           <Tabs defaultValue="css">
             <TabsList className="w-full">
-              {FORMATS.map(({ key, label }) => (
+              {FORMATS.map(({ key, labelKey }) => (
                 <TabsTrigger key={key} value={key} className="flex-1 text-xs">
-                  {label}
+                  {t(`formats.${labelKey}`)}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -86,15 +89,15 @@ export function ExportPanel() {
                     ) : (
                       <Copy className="w-3 h-3 mr-1" />
                     )}
-                    Copy
+                    {t("copy")}
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleDownload(key)}
                   >
-                    <Download className="w-3 h-3 mr-1" />
-                    Download
+                    <Download className="w-4 h-4 mr-1" />
+                    {t("download")}
                   </Button>
                 </div>
               </TabsContent>
@@ -104,7 +107,7 @@ export function ExportPanel() {
           <div className="border-t pt-4">
             <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
               <Share2 className="w-4 h-4" />
-              Share URL
+              {t("shareUrl")}
             </h4>
             <div className="flex gap-2">
               <input

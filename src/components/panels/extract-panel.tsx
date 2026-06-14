@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { usePalette } from "@/hooks/use-palette";
 import { smartMapToPalette } from "@/lib/color";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,7 @@ import {
 import { ImageIcon, Loader2 } from "lucide-react";
 
 export function ExtractPanel() {
+  const t = useTranslations("ExtractPanel");
   const { setPalette } = usePalette();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
@@ -64,15 +66,15 @@ export function ExtractPanel() {
         className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 cursor-pointer"
       >
         <ImageIcon className="w-4 h-4 mr-1" />
-        Extract
+        {t("trigger")}
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Extract from Image</SheetTitle>
+          <SheetTitle>{t("title")}</SheetTitle>
         </SheetHeader>
         <div className="mt-6 flex flex-col gap-4">
           <p className="text-sm text-muted-foreground">
-            Upload an image to extract a palette from its dominant colors.
+            {t("description")}
           </p>
 
           <input
@@ -93,13 +95,13 @@ export function ExtractPanel() {
             ) : (
               <ImageIcon className="w-4 h-4 mr-2" />
             )}
-            {loading ? "Extracting..." : "Choose Image"}
+            {loading ? t("extracting") : t("chooseImage")}
           </Button>
 
           {preview && (
             <img
               src={preview}
-              alt="Uploaded preview"
+              alt={t("previewAlt")}
               className="rounded-lg border border-border max-h-48 object-contain"
             />
           )}

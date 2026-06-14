@@ -1,18 +1,15 @@
 "use server";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { z } from "zod";
+import {
+  PaletteResponseSchema,
+  type GenerateErrorCode,
+  type GenerateResult,
+} from "@/lib/ai-palette-types";
 
-const PaletteResponseSchema = z.object({
-  primary: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
-  secondary: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
-  accent: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
-  background: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
-  surface: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
-});
-
-export type PaletteResponse = z.infer<typeof PaletteResponseSchema>;
-
+// NOTE (ADR-0004): the system prompt is intentionally English-only. It governs
+// the output *format* (5 fixed English JSON keys validated below), and Gemini
+// understands non-English mood input regardless of the instruction language.
 const SYSTEM_PROMPT = `You are a color palette generator. Given a mood description, generate exactly 5 colors for a UI design system.
 
 Each color has a specific role with semantic meaning:
@@ -31,16 +28,10 @@ Rules:
 
 Respond with ONLY the JSON object, no markdown, no explanation.`;
 
-interface GenerateResult {
-  success: boolean;
-  palette?: PaletteResponse;
-  error?: string;
-}
-
 async function callGemini(mood: string): Promise<GenerateResult> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return { success: false, error: "AI generation is not configured." };
+    return { success: false, errorCode: "NOT_CONFIGURED" };
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -69,7 +60,7 @@ async function callGemini(mood: string): Promise<GenerateResult> {
   if (!validated.success) {
     return {
       success: false,
-      error: "AI returned an invalid palette format.",
+      errorCode: "INVALID_FORMAT",
     };
   }
 
@@ -80,7 +71,7 @@ export async function generatePaletteFromMood(
   mood: string
 ): Promise<GenerateResult> {
   if (!mood.trim()) {
-    return { success: false, error: "Please describe a mood." };
+    return { success: false, errorCode: "EMPTY_MOOD" };
   }
 
   try {
@@ -92,11 +83,11 @@ export async function generatePaletteFromMood(
     const retry = await callGemini(mood);
     if (retry.success) return retry;
 
-    return { success: false, error: retry.error || "Generation failed." };
+    return { success: false, errorCode: retry.errorCode ?? "GENERIC" };
   } catch {
     return {
       success: false,
-      error: "Something went wrong. Please try again.",
+      errorCode: "GENERIC",
     };
   }
 }

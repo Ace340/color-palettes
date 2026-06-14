@@ -9,7 +9,6 @@ import {
   hslToHex,
   smartMapToPalette,
   getRoleOrder,
-  ROLE_LABELS,
 } from "../color";
 import { DEFAULT_PALETTE, HARMONY_MODES, type HarmonyMode } from "../types";
 
@@ -310,17 +309,5 @@ describe("getRoleOrder", () => {
       "background",
       "surface",
     ]);
-  });
-});
-
-// --- ROLE_LABELS ---
-
-describe("ROLE_LABELS", () => {
-  it("has a label for every palette role", () => {
-    const roles = getRoleOrder();
-    for (const role of roles) {
-      expect(ROLE_LABELS[role]).toBeDefined();
-      expect(typeof ROLE_LABELS[role]).toBe("string");
-    }
   });
 });

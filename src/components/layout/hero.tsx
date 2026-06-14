@@ -1,9 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { usePalette } from "@/hooks/use-palette";
 
 export function Hero() {
+  const t = useTranslations("Hero");
   const { palette, surpriseMe } = usePalette();
 
   return (
@@ -12,13 +14,12 @@ export function Hero() {
         {/* Left: Text */}
         <div className="flex-1 flex flex-col gap-6 text-center md:text-left">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
-            Create Beautiful
+            {t("titleLine1")}
             <br />
-            Color Palettes
+            {t("titleLine2")}
           </h1>
           <p className="text-lg text-muted-foreground max-w-lg mx-auto md:mx-0">
-            Discover harmonious palettes with AI, color theory, and live
-            previews. Export anywhere in one click.
+            {t("subtitle")}
           </p>
           <div className="flex justify-center md:justify-start">
             <Button
@@ -26,7 +27,7 @@ export function Hero() {
               className="btn-surprise text-lg px-10 py-6 h-auto rounded-xl min-w-[220px]"
               onClick={surpriseMe}
             >
-              Surprise Me
+              {t("surpriseMe")}
             </Button>
           </div>
         </div>

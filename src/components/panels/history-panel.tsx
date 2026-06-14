@@ -1,7 +1,8 @@
 "use client";
 
+import { useTranslations, useFormatter } from "next-intl";
 import { usePalette } from "@/hooks/use-palette";
-import { getRoleOrder, ROLE_LABELS } from "@/lib/color";
+import { getRoleOrder } from "@/lib/color";
 import {
   Sheet,
   SheetContent,
@@ -14,6 +15,9 @@ import { Separator } from "@/components/ui/separator";
 import { History, Trash2 } from "lucide-react";
 
 export function HistoryPanel() {
+  const t = useTranslations("HistoryPanel");
+  const tRoles = useTranslations("Roles");
+  const format = useFormatter();
   const { savedPalettes, save, remove, loadSaved } = usePalette();
 
   return (
@@ -22,22 +26,22 @@ export function HistoryPanel() {
         className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 cursor-pointer"
       >
         <History className="w-4 h-4 mr-1" />
-        Saved
+        {t("trigger")}
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Saved Palettes</SheetTitle>
+          <SheetTitle>{t("title")}</SheetTitle>
         </SheetHeader>
         <div className="mt-6 flex flex-col gap-4">
           <Button onClick={save} variant="default" size="sm">
-            Save Current Palette
+            {t("saveCurrent")}
           </Button>
 
           <Separator />
 
           {savedPalettes.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
-              No saved palettes yet.
+              {t("empty")}
             </p>
           ) : (
             <div className="flex flex-col gap-3 overflow-y-auto max-h-[60vh]">
@@ -56,12 +60,15 @@ export function HistoryPanel() {
                           key={role}
                           className="w-6 h-6 rounded-sm first:rounded-l-md last:rounded-r-md"
                           style={{ backgroundColor: saved.colors[role] }}
-                          title={ROLE_LABELS[role]}
+                          title={tRoles(role)}
                         />
                       ))}
                     </div>
                     <span className="text-[10px] text-muted-foreground font-mono">
-                      {new Date(saved.createdAt).toLocaleDateString()}
+                      {/* Formats by app locale (next-intl), not the browser locale. */}
+                      {format.dateTime(new Date(saved.createdAt), {
+                        dateStyle: "medium",
+                      })}
                     </span>
                   </button>
                   <Button
@@ -69,6 +76,7 @@ export function HistoryPanel() {
                     size="icon"
                     className="h-6 w-6 shrink-0"
                     onClick={() => remove(saved.id)}
+                    aria-label={t("deleteAria")}
                   >
                     <Trash2 className="w-3 h-3 text-muted-foreground" />
                   </Button>

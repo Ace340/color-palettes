@@ -1,13 +1,21 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { usePalette } from "@/hooks/use-palette";
 
 export function LivePreview() {
+  const t = useTranslations("LivePreview");
   const { palette } = usePalette();
+
+  const metrics = [
+    { label: t("metricRevenue"), value: "$12.4k" },
+    { label: t("metricUsers"), value: "2,847" },
+    { label: t("metricGrowth"), value: "+14%" },
+  ];
 
   return (
     <div className="flex flex-col gap-3">
-      <h3 className="text-sm font-semibold text-foreground">Live Preview</h3>
+      <h3 className="text-sm font-semibold text-foreground">{t("heading")}</h3>
       <div
         className="rounded-xl p-6 border border-border/50"
         style={{ backgroundColor: palette.background }}
@@ -20,20 +28,20 @@ export function LivePreview() {
             className="text-lg font-bold mb-1"
             style={{ color: palette.primary }}
           >
-            Dashboard Overview
+            {t("mockDashboardOverview")}
           </h4>
           <p
             className="text-sm mb-3"
             style={{ color: palette.secondary }}
           >
-            Your key metrics at a glance
+            {t("mockSubtitle")}
           </p>
           <div className="flex gap-2">
             <button
               className="px-3 py-1.5 rounded-md text-sm font-medium text-white"
               style={{ backgroundColor: palette.accent }}
             >
-              View Reports
+              {t("mockViewReports")}
             </button>
             <button
               className="px-3 py-1.5 rounded-md text-sm font-medium border"
@@ -43,13 +51,13 @@ export function LivePreview() {
                 backgroundColor: "transparent",
               }}
             >
-              Settings
+              {t("mockSettings")}
             </button>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-2">
-            {["Revenue", "Users", "Growth"].map((label) => (
+            {metrics.map((metric) => (
               <div
-                key={label}
+                key={metric.label}
                 className="rounded-md p-2 text-center"
                 style={{
                   backgroundColor: palette.background,
@@ -60,17 +68,13 @@ export function LivePreview() {
                   className="text-xs font-medium"
                   style={{ color: palette.secondary }}
                 >
-                  {label}
+                  {metric.label}
                 </div>
                 <div
                   className="text-sm font-bold"
                   style={{ color: palette.primary }}
                 >
-                  {label === "Revenue"
-                    ? "$12.4k"
-                    : label === "Users"
-                      ? "2,847"
-                      : "+14%"}
+                  {metric.value}
                 </div>
               </div>
             ))}

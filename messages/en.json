@@ -1,0 +1,121 @@
+{
+  "Metadata": {
+    "title": "Color Palettes",
+    "description": "Create beautiful color palettes with AI, harmonies, and image extraction"
+  },
+  "Navbar": {
+    "nav": {
+      "generator": "Generator",
+      "harmony": "Harmony",
+      "ai": "AI",
+      "preview": "Preview"
+    },
+    "toggleTheme": "Toggle theme",
+    "toggleMenu": "Toggle menu",
+    "language": "Language",
+    "switchToEnglish": "Switch to English",
+    "switchToSpanish": "Switch to Spanish"
+  },
+  "Hero": {
+    "titleLine1": "Create Beautiful",
+    "titleLine2": "Color Palettes",
+    "subtitle": "Discover harmonious palettes with AI, color theory, and live previews. Export anywhere in one click.",
+    "surpriseMe": "Surprise Me"
+  },
+  "GeneratorSection": {
+    "title": "Palette Generator",
+    "description": "Pick colors for each role, or generate from harmony and AI below",
+    "undo": "Undo"
+  },
+  "HarmonySection": {
+    "title": "Harmony",
+    "description": "Generate a complete palette from your primary color using color theory"
+  },
+  "HarmonyControls": {
+    "heading": "Harmony",
+    "generateFrom": "Generate from {role} color",
+    "modes": {
+      "complementary": "Complementary",
+      "analogous": "Analogous",
+      "triadic": "Triadic",
+      "split-complementary": "Split Complementary",
+      "tetradic": "Tetradic",
+      "monochromatic": "Monochromatic"
+    }
+  },
+  "AiSection": {
+    "title": "AI Generator",
+    "description": "Describe a mood in natural language and let AI craft your palette"
+  },
+  "AiMoodInput": {
+    "heading": "AI Mood Generator",
+    "placeholder": "Describe a mood... (e.g., warm sunset, cyberpunk Tokyo)",
+    "generate": "Generate",
+    "errors": {
+      "NOT_CONFIGURED": "AI generation is not configured.",
+      "INVALID_FORMAT": "AI returned an invalid palette format.",
+      "EMPTY_MOOD": "Please describe a mood.",
+      "GENERIC": "Something went wrong. Please try again."
+    }
+  },
+  "PreviewSection": {
+    "title": "Live Preview",
+    "description": "See your palette in a real UI context"
+  },
+  "LivePreview": {
+    "heading": "Live Preview",
+    "mockDashboardOverview": "Dashboard Overview",
+    "mockSubtitle": "Your key metrics at a glance",
+    "mockViewReports": "View Reports",
+    "mockSettings": "Settings",
+    "metricRevenue": "Revenue",
+    "metricUsers": "Users",
+    "metricGrowth": "Growth"
+  },
+  "ContrastBadges": {
+    "heading": "Contrast",
+    "pairLabels": {
+      "primaryBackground": "Primary / Background",
+      "accentBackground": "Accent / Background",
+      "textSurface": "Text / Surface"
+    }
+  },
+  "ExportPanel": {
+    "trigger": "Export",
+    "title": "Export Palette",
+    "shareUrl": "Share URL",
+    "copy": "Copy",
+    "download": "Download",
+    "formats": {
+      "css": "CSS Variables",
+      "tailwind": "Tailwind",
+      "json": "JSON"
+    }
+  },
+  "ExtractPanel": {
+    "trigger": "Extract",
+    "title": "Extract from Image",
+    "description": "Upload an image to extract a palette from its dominant colors.",
+    "chooseImage": "Choose Image",
+    "extracting": "Extracting...",
+    "previewAlt": "Uploaded preview"
+  },
+  "HistoryPanel": {
+    "trigger": "Saved",
+    "title": "Saved Palettes",
+    "saveCurrent": "Save Current Palette",
+    "empty": "No saved palettes yet.",
+    "deleteAria": "Delete saved palette"
+  },
+  "Roles": {
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "accent": "Accent",
+    "background": "Background",
+    "surface": "Surface",
+    "editColor": "Edit {role} color"
+  },
+  "Common": {
+    "close": "Close"
+  }
+}

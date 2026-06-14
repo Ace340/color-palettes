@@ -1,22 +1,25 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { usePalette } from "@/hooks/use-palette";
 import { generatePaletteFromMood } from "@/app/actions/generate-palette";
+import type { GenerateErrorCode } from "@/lib/ai-palette-types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sparkles, Loader2 } from "lucide-react";
 
 export function AiMoodInput() {
+  const t = useTranslations("AiMoodInput");
   const [mood, setMood] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [errorCode, setErrorCode] = useState<GenerateErrorCode | null>(null);
   const [isPending, startTransition] = useTransition();
   const { setPalette } = usePalette();
 
   const handleGenerate = () => {
     if (!mood.trim()) return;
 
-    setError(null);
+    setErrorCode(null);
     startTransition(async () => {
       const result = await generatePaletteFromMood(mood);
       if (result.success && result.palette) {
@@ -27,8 +30,9 @@ export function AiMoodInput() {
           background: result.palette.background,
           surface: result.palette.surface,
         });
-      } else {
-        setError(result.error || "Generation failed.");
+      } else if (result.errorCode) {
+        // Server action returns codes; translation happens here, client-side.
+        setErrorCode(result.errorCode);
       }
     });
   };
@@ -43,14 +47,14 @@ export function AiMoodInput() {
     <div className="flex flex-col gap-3">
       <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
         <Sparkles className="w-4 h-4" />
-        AI Mood Generator
+        {t("heading")}
       </h3>
       <div className="flex gap-2">
         <Input
           value={mood}
           onChange={(e) => setMood(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Describe a mood... (e.g., warm sunset, cyberpunk Tokyo)"
+          placeholder={t("placeholder")}
           disabled={isPending}
           className="text-sm"
         />
@@ -62,12 +66,12 @@ export function AiMoodInput() {
           {isPending ? (
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
-            "Generate"
+            t("generate")
           )}
         </Button>
       </div>
-      {error && (
-        <p className="text-xs text-destructive">{error}</p>
+      {errorCode && (
+        <p className="text-xs text-destructive">{t(`errors.${errorCode}`)}</p>
       )}
     </div>
   );

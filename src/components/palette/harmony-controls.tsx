@@ -1,12 +1,15 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { usePalette } from "@/hooks/use-palette";
-import { generateHarmony, ROLE_LABELS } from "@/lib/color";
+import { generateHarmony } from "@/lib/color";
 import { HARMONY_MODES } from "@/lib/types";
 import type { HarmonyMode } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 
 export function HarmonyControls() {
+  const t = useTranslations("HarmonyControls");
+  const tRoles = useTranslations("Roles");
   const { palette, setPalette } = usePalette();
 
   const handleGenerate = (mode: HarmonyMode) => {
@@ -16,9 +19,9 @@ export function HarmonyControls() {
 
   return (
     <div className="flex flex-col gap-3">
-      <h3 className="text-sm font-semibold text-foreground">Harmony</h3>
+      <h3 className="text-sm font-semibold text-foreground">{t("heading")}</h3>
       <p className="text-xs text-muted-foreground">
-        Generate from {ROLE_LABELS.primary} color
+        {t("generateFrom", { role: tRoles("primary") })}
       </p>
       <div className="flex flex-wrap gap-2">
         {HARMONY_MODES.map((mode) => (
@@ -27,9 +30,9 @@ export function HarmonyControls() {
             variant="outline"
             size="sm"
             onClick={() => handleGenerate(mode)}
-            className="text-xs capitalize"
+            className="text-xs"
           >
-            {mode.replace("-", " ")}
+            {t(`modes.${mode}`)}
           </Button>
         ))}
       </div>

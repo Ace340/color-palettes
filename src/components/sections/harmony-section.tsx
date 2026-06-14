@@ -1,12 +1,15 @@
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/layout/section";
 import { HarmonyControls } from "@/components/palette/harmony-controls";
 
 export function HarmonySection() {
+  const t = useTranslations("HarmonySection");
+
   return (
     <Section
       id="harmony"
-      title="Harmony"
-      description="Generate a complete palette from your primary color using color theory"
+      title={t("title")}
+      description={t("description")}
     >
       <HarmonyControls />
     </Section>

@@ -1,8 +1,8 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ColorPicker } from "./color-picker";
-import { ROLE_LABELS } from "@/lib/color";
 import type { PaletteRole } from "@/lib/types";
 
 interface ColorSlotProps {
@@ -12,18 +12,21 @@ interface ColorSlotProps {
 }
 
 export function ColorSlot({ role, color, onChange }: ColorSlotProps) {
+  const tRoles = useTranslations("Roles");
+  const roleLabel = tRoles(role);
+
   return (
     <Popover>
       <PopoverTrigger
         className="group flex flex-col items-center gap-2 cursor-pointer"
-        aria-label={`Edit ${ROLE_LABELS[role]} color`}
+        aria-label={tRoles("editColor", { role: roleLabel })}
       >
         <div
           className="w-20 h-20 rounded-xl border-2 border-border shadow-sm transition-transform group-hover:scale-105"
           style={{ backgroundColor: color }}
         />
         <span className="text-xs text-muted-foreground font-medium">
-          {ROLE_LABELS[role]}
+          {roleLabel}
         </span>
         <span className="text-[10px] font-mono text-muted-foreground/70">
           {color.toUpperCase()}
