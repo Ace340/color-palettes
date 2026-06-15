@@ -41,17 +41,70 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-/** Localized metadata + hreflang alternates (as-needed URLs from ADR-0002). */
+/** Canonical production origin used to resolve relative metadata URLs. */
+const SITE_URL = "https://chromattic.vercel.app";
+
+/**
+ * Localized SEO metadata + hreflang alternates.
+ *
+ * Hreflang follows the `as-needed` URL strategy (ADR-0002): English is served
+ * at `/` with no prefix, Spanish at `/es`. Title/description come from the
+ * per-locale `Metadata` message namespace so each language renders its own copy.
+ */
 export async function generateMetadata({
   params,
 }: Omit<Props, "children">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
+  const isEs = locale === "es";
+
+  const title = t("title");
+  const description = t("description");
 
   return {
-    title: t("title"),
-    description: t("description"),
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: title,
+      template: "%s · Chromattic",
+    },
+    description,
+    keywords: [
+      "color palette generator",
+      "generador de paletas",
+      "color picker",
+      "design tools",
+      "herramientas de diseño",
+      "color harmony",
+      "WCAG",
+      "UI colors",
+      "Tailwind colors",
+      "CSS variables",
+      "chromattic",
+      "palette maker",
+      "color scheme",
+    ],
+    authors: [{ name: "Chromattic" }],
+    creator: "Chromattic",
+    openGraph: {
+      type: "website",
+      locale: isEs ? "es_ES" : "en_US",
+      alternateLocale: [isEs ? "en_US" : "es_ES"],
+      url: isEs ? `${SITE_URL}/es` : SITE_URL,
+      siteName: "Chromattic",
+      title,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
     alternates: {
+      canonical: isEs ? "/es" : "/",
       languages: {
         en: "/",
         es: "/es",
