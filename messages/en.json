@@ -27,10 +27,6 @@
     "description": "Pick colors for each role, or generate from harmony and AI below",
     "undo": "Undo"
   },
-  "HarmonySection": {
-    "title": "Harmony",
-    "description": "Generate a complete palette from your primary color using color theory"
-  },
   "HarmonyControls": {
     "heading": "Harmony",
     "generateFrom": "Generate from {role} color",

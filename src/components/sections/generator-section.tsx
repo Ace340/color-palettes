@@ -5,6 +5,7 @@ import { usePalette } from "@/hooks/use-palette";
 import { Section } from "@/components/layout/section";
 import { PaletteSwatches } from "@/components/palette/palette-swatches";
 import { ContrastBadges } from "@/components/palette/contrast-badges";
+import { HarmonyControls } from "@/components/palette/harmony-controls";
 import { Button } from "@/components/ui/button";
 
 export function GeneratorSection() {
@@ -33,6 +34,7 @@ export function GeneratorSection() {
       }
     >
       <PaletteSwatches palette={palette} onColorChange={setRoleColor} />
+      <HarmonyControls />
       <ContrastBadges />
     </Section>
   );

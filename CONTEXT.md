@@ -46,7 +46,7 @@ Export a palette in multiple formats (CSS Variables, Tailwind Config, JSON, URL)
 
 ## Application Structure
 
-Single-page application on `/`. The page has a sticky Navbar with jump links, a Hero section, and four content sections (Generator, Harmony, AI Generator, Live Preview) stacked vertically with generous spacing. Image extraction, export, and saved palette history are accessed via slide-in panels (Shadcn Sheet) triggered from the Navbar. URL changes only for sharing (`?p=...`).
+Single-page application on `/`. The page has a sticky Navbar with jump links, a Hero section, and three content sections (Generator, AI Generator, Live Preview) stacked vertically with generous spacing. Harmony controls live inside the Generator section as a compact toolbar beneath the swatches. Image extraction, export, and saved palette history are accessed via slide-in panels (Shadcn Sheet) triggered from the Navbar. URL changes only for sharing (`?p=...`).
 
 The app UI defaults to light mode (slightly off-white background) with a dark mode toggle in the Navbar. On mobile, the Navbar collapses into a hamburger menu. Palette colors appear only in the swatches and the live preview panel — the app chrome stays neutral and readable regardless of the palette being edited.
 

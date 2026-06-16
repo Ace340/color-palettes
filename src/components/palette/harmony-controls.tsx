@@ -18,12 +18,14 @@ export function HarmonyControls() {
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <h3 className="text-sm font-semibold text-foreground">{t("heading")}</h3>
-      <p className="text-xs text-muted-foreground">
-        {t("generateFrom", { role: tRoles("primary") })}
-      </p>
-      <div className="flex flex-wrap gap-2">
+    <div id="harmony" className="flex flex-col items-center gap-3 scroll-mt-24">
+      <div className="flex flex-col items-center gap-1">
+        <h3 className="text-sm font-semibold text-foreground">{t("heading")}</h3>
+        <p className="text-xs text-muted-foreground">
+          {t("generateFrom", { role: tRoles("primary") })}
+        </p>
+      </div>
+      <div className="flex flex-wrap justify-center gap-2">
         {HARMONY_MODES.map((mode) => (
           <Button
             key={mode}

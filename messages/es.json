@@ -27,10 +27,6 @@
     "description": "Elige colores para cada rol, o genera con armonía e IA a continuación",
     "undo": "Deshacer"
   },
-  "HarmonySection": {
-    "title": "Armonía",
-    "description": "Genera una paleta completa a partir de tu color primario usando teoría del color"
-  },
   "HarmonyControls": {
     "heading": "Armonía",
     "generateFrom": "Generar desde el color {role}",
