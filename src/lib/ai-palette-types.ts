@@ -21,6 +21,7 @@ export type PaletteResponse = z.infer<typeof PaletteResponseSchema>;
 
 export type GenerateErrorCode =
   | "NOT_CONFIGURED"
+  | "QUOTA_EXCEEDED"
   | "INVALID_FORMAT"
   | "EMPTY_MOOD"
   | "GENERIC";

@@ -53,6 +53,7 @@
     "generate": "Generate",
     "errors": {
       "NOT_CONFIGURED": "AI generation is not configured.",
+      "QUOTA_EXCEEDED": "Daily AI usage limit reached. Please try again later.",
       "INVALID_FORMAT": "AI returned an invalid palette format.",
       "EMPTY_MOOD": "Please describe a mood.",
       "GENERIC": "Something went wrong. Please try again."

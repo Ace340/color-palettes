@@ -28,6 +28,21 @@ Rules:
 
 Respond with ONLY the JSON object, no markdown, no explanation.`;
 
+/**
+ * Detects Google API quota / rate-limit failures (HTTP 429). Retrying these
+ * immediately makes throttling worse and Gemini asks us to back off, so the
+ * caller treats them as non-retryable.
+ */
+function isQuotaError(err: unknown): boolean {
+  if (typeof err === "object" && err !== null && "status" in err) {
+    return (err as { status: unknown }).status === 429;
+  }
+  if (err instanceof Error) {
+    return /quota|429|rate limit/i.test(err.message);
+  }
+  return false;
+}
+
 async function callGemini(mood: string): Promise<GenerateResult> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -37,16 +52,24 @@ async function callGemini(mood: string): Promise<GenerateResult> {
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-  const result = await model.generateContent({
-    contents: [
-      {
-        role: "user",
-        parts: [{ text: `${SYSTEM_PROMPT}\n\nMood: "${mood}"` }],
-      },
-    ],
-  });
-
-  const text = result.response.text().trim();
+  let text: string;
+  try {
+    const result = await model.generateContent({
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: `${SYSTEM_PROMPT}\n\nMood: "${mood}"` }],
+        },
+      ],
+    });
+    text = result.response.text().trim();
+  } catch (err) {
+    // Never swallow the real cause — log it server-side for debugging.
+    console.error("[generate-palette] Gemini API call failed:", err);
+    return isQuotaError(err)
+      ? { success: false, errorCode: "QUOTA_EXCEEDED" }
+      : { success: false, errorCode: "GENERIC" };
+  }
 
   // Strip markdown code fences if present
   const cleaned = text
@@ -54,7 +77,13 @@ async function callGemini(mood: string): Promise<GenerateResult> {
     .replace(/\s*```$/i, "")
     .trim();
 
-  const parsed = JSON.parse(cleaned);
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(cleaned);
+  } catch {
+    return { success: false, errorCode: "INVALID_FORMAT" };
+  }
+
   const validated = PaletteResponseSchema.safeParse(parsed);
 
   if (!validated.success) {
@@ -79,15 +108,24 @@ export async function generatePaletteFromMood(
     const result = await callGemini(mood);
     if (result.success) return result;
 
-    // Retry once on failure
-    const retry = await callGemini(mood);
-    if (retry.success) return retry;
+    // Deterministic / non-transient failures: retrying can't help.
+    if (
+      result.errorCode === "NOT_CONFIGURED" ||
+      result.errorCode === "QUOTA_EXCEEDED"
+    ) {
+      return result;
+    }
 
-    return { success: false, errorCode: retry.errorCode ?? "GENERIC" };
-  } catch {
-    return {
-      success: false,
-      errorCode: "GENERIC",
-    };
+    // Retry once on transient failures (network blip, generic API error, or a
+    // malformed response that may parse cleanly on a second attempt).
+    const retry = await callGemini(mood);
+    return retry.success
+      ? retry
+      : { success: false, errorCode: retry.errorCode ?? "GENERIC" };
+  } catch (err) {
+    // Defensive: callGemini handles known errors, but a server action should
+    // never throw an unstructured error to the client.
+    console.error("[generate-palette] Unexpected error:", err);
+    return { success: false, errorCode: "GENERIC" };
   }
 }
