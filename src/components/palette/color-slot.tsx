@@ -22,7 +22,7 @@ export function ColorSlot({ role, color, onChange }: ColorSlotProps) {
         aria-label={tRoles("editColor", { role: roleLabel })}
       >
         <div
-          className="w-20 h-20 rounded-xl border-2 border-border shadow-sm transition-transform group-hover:scale-105"
+          className="w-20 h-20 md:w-28 md:h-28 rounded-xl border-2 border-border shadow-sm transition-transform group-hover:scale-105"
           style={{ backgroundColor: color }}
         />
         <span className="text-xs text-muted-foreground font-medium">

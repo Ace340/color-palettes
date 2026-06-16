@@ -13,7 +13,7 @@ export function PaletteSwatches({ palette, onColorChange }: PaletteSwatchesProps
   const roles = getRoleOrder();
 
   return (
-    <div className="flex items-start justify-center gap-4 flex-wrap">
+    <div className="flex items-start justify-center gap-2 flex-wrap">
       {roles.map((role) => (
         <ColorSlot
           key={role}
