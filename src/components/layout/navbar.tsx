@@ -57,26 +57,9 @@ export function Navbar() {
 
         {/* Right Actions — desktop */}
         <div className="hidden md:flex items-center gap-2">
-          <LanguageToggle />
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            aria-label={t("toggleTheme")}
-          >
-            {theme === "light" ? (
-              <Moon className="w-4 h-4" />
-            ) : (
-              <Sun className="w-4 h-4" />
-            )}
-          </Button>
           <HistoryPanel />
           <ExtractPanel />
           <ExportPanel />
-        </div>
-
-        {/* Mobile: hamburger + theme toggle */}
-        <div className="flex md:hidden items-center gap-2">
           <LanguageToggle />
           <Button
             variant="ghost"
@@ -90,6 +73,10 @@ export function Navbar() {
               <Sun className="w-4 h-4" />
             )}
           </Button>
+        </div>
+
+        {/* Mobile: hamburger */}
+        <div className="flex md:hidden items-center gap-2">
           <Button
             variant="ghost"
             size="icon"
@@ -123,6 +110,19 @@ export function Navbar() {
               <HistoryPanel />
               <ExtractPanel />
               <ExportPanel />
+              <LanguageToggle />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                aria-label={t("toggleTheme")}
+              >
+                {theme === "light" ? (
+                  <Moon className="w-4 h-4" />
+                ) : (
+                  <Sun className="w-4 h-4" />
+                )}
+              </Button>
             </div>
           </div>
         </div>
