@@ -53,6 +53,7 @@
     "generate": "Generate",
     "errors": {
       "NOT_CONFIGURED": "AI generation is not configured.",
+      "UNAUTHORIZED": "AI service rejected the API key. Please check your configuration.",
       "QUOTA_EXCEEDED": "Daily AI usage limit reached. Please try again later.",
       "INVALID_FORMAT": "AI returned an invalid palette format.",
       "EMPTY_MOOD": "Please describe a mood.",

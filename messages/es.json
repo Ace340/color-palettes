@@ -53,6 +53,7 @@
     "generate": "Generar",
     "errors": {
       "NOT_CONFIGURED": "La generación con IA no está configurada.",
+      "UNAUTHORIZED": "El servicio de IA rechazó la clave API. Revisa la configuración.",
       "QUOTA_EXCEEDED": "Se ha alcanzado el límite diario de uso de IA. Inténtalo de nuevo más tarde.",
       "INVALID_FORMAT": "La IA devolvió un formato de paleta no válido.",
       "EMPTY_MOOD": "Por favor, describe un estado de ánimo.",

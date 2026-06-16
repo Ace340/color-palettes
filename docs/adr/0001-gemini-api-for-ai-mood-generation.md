@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by [ADR-0005](0005-zai-glm-for-ai-mood-generation.md) (2026-06-16)
 
 ## Context
 

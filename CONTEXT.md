@@ -51,7 +51,7 @@ Single-page application on `/`. The page has a sticky Navbar with jump links, a 
 The app UI defaults to light mode (slightly off-white background) with a dark mode toggle in the Navbar. On mobile, the Navbar collapses into a hamburger menu. Palette colors appear only in the swatches and the live preview panel — the app chrome stays neutral and readable regardless of the palette being edited.
 
 ### AI Mood Generation
-Users describe a mood in natural language. The prompt sent to Gemini includes role semantics (e.g., "background should be low-saturation and high-lightness, accent should be the most vivid"). Gemini is instructed to return structured JSON mapping roles to hex values. The server action validates the response with Zod, retries once on failure, and returns a graceful error if it still fails.
+Users describe a mood in natural language. The prompt sent to the model includes role semantics (e.g., "background should be low-saturation and high-lightness, accent should be the most vivid"). The model is instructed to return structured JSON mapping roles to hex values. The server action validates the response with Zod, retries once on failure, and returns a graceful error if it still fails.
 
 ### Color Picker
 Each palette slot opens a color picker (react-colorful) in a popover. A visual saturation/brightness square plus hue slider for quick selection, with HSL number sliders below for precise fine-tuning. All values round-trip through hex as the source of truth.
