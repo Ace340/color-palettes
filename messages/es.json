@@ -52,7 +52,9 @@
       "UNAUTHORIZED": "El servicio de IA rechazó la clave API. Revisa la configuración.",
       "QUOTA_EXCEEDED": "Se ha alcanzado el límite diario de uso de IA. Inténtalo de nuevo más tarde.",
       "INVALID_FORMAT": "La IA devolvió un formato de paleta no válido.",
+      "INVALID_MOOD": "Usa solo letras, números, espacios y puntuación básica (2–200 caracteres).",
       "EMPTY_MOOD": "Por favor, describe un estado de ánimo.",
+      "RATE_LIMITED": "Demasiadas solicitudes. Inténtalo de nuevo en {seconds}s.",
       "GENERIC": "Algo salió mal. Inténtalo de nuevo."
     }
   },

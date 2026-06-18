@@ -52,7 +52,9 @@
       "UNAUTHORIZED": "AI service rejected the API key. Please check your configuration.",
       "QUOTA_EXCEEDED": "Daily AI usage limit reached. Please try again later.",
       "INVALID_FORMAT": "AI returned an invalid palette format.",
+      "INVALID_MOOD": "Use only letters, numbers, spaces, and basic punctuation (2–200 characters).",
       "EMPTY_MOOD": "Please describe a mood.",
+      "RATE_LIMITED": "Too many requests. Try again in {seconds}s.",
       "GENERIC": "Something went wrong. Please try again."
     }
   },
