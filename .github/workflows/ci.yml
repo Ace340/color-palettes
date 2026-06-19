@@ -1,0 +1,56 @@
+name: CI
+
+# Runs on every push to main (so direct pushes still get verified) and on every
+# PR targeting main (so broken code can be caught before merge). Matches the
+# exact commands Vercel runs at deploy time.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel a previous run on the same branch when new commits arrive, to avoid
+# stacking redundant CI minutes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Matches @types/node ^20 and the Vercel production runtime.
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('src/**', '*.config.*', 'tsconfig.json', 'postcss.config.mjs') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-
+
+      # Build is env-var-independent: ZAI_API_KEY and the UPSTASH_* values are
+      # read at runtime (not build time), and SITE_URL has a fallback default.
+      # So CI needs no secrets to validate the build.
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
