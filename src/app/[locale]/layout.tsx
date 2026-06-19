@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 const cabinetGrotesk = localFont({
@@ -40,9 +41,6 @@ type Props = {
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
-
-/** Canonical production origin used to resolve relative metadata URLs. */
-const SITE_URL = "https://chromattic.vercel.app";
 
 /**
  * Localized SEO metadata + hreflang alternates.
