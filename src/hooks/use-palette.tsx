@@ -10,7 +10,6 @@ import {
 } from "react";
 import type { Palette, PaletteRole, SavedPalette } from "@/lib/types";
 import { DEFAULT_PALETTE } from "@/lib/types";
-import { PALETTE_ROLES } from "@/lib/types";
 import {
   loadSavedPalettes,
   savePalette,
@@ -48,8 +47,11 @@ export function PaletteProvider({ children }: { children: ReactNode }) {
   const [savedPalettes, setSavedPalettes] = useState<SavedPalette[]>([]);
   const [previousPalette, setPreviousPalette] = useState<Palette | null>(null);
 
-  // Initialize from URL or default on mount
+  // Initialize from URL or default on mount. A lazy useState initializer can't
+  // be used: window/localStorage are unavailable during SSR and would cause
+  // hydration mismatches. Effect-after-mount is the SSR-safe pattern.
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     const params = new URLSearchParams(window.location.search);
     const urlPalette = decodePaletteFromUrl(params);
     if (urlPalette) {
@@ -57,6 +59,7 @@ export function PaletteProvider({ children }: { children: ReactNode }) {
     }
 
     setSavedPalettes(loadSavedPalettes());
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   // Sync URL when palette changes

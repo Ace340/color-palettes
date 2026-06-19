@@ -110,7 +110,7 @@ export function getPaletteContrasts(
     ["surface-text", "#000000", palette.surface],
   ];
 
-  return pairings.map(([label, fg, bg]) => {
+  return pairings.map(([, fg, bg]) => {
     const ratio = getContrastRatio(fg, bg);
     return {
       foreground: fg,
@@ -153,7 +153,7 @@ export function smartMapToPalette(colors: string[]): Palette {
   }
 
   const chromaColors = colors.map((c) => {
-    const [h, s, l] = chroma(c).hsl();
+    const [, s] = chroma(c).hsl();
     return {
       hex: c,
       saturation: isNaN(s) ? 0 : s,

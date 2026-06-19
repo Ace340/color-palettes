@@ -1,6 +1,4 @@
 import type { Palette } from "./types";
-import { isValidHex } from "./color";
-import { DEFAULT_PALETTE } from "./types";
 
 const STORAGE_KEY = "color-palettes-saved";
 const MAX_PALETTES = 20;

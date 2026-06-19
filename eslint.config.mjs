@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored opencode tooling + temp dir (not part of the app source).
+    ".opencode/**",
+    ".tmp/**",
   ]),
 ]);
 

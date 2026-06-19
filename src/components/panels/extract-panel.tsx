@@ -99,6 +99,11 @@ export function ExtractPanel() {
           </Button>
 
           {preview && (
+            // Raw <img> is intentional: `preview` is a transient object/data
+            // URL of a user-uploaded image. next/image would add optimization
+            // overhead and require blob/data-URL remote-pattern config for no
+            // benefit on a throwaway client-side preview.
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={preview}
               alt={t("previewAlt")}

@@ -5,7 +5,6 @@ import {
   getDefaultOrUrlPalette,
 } from "../url-encoding";
 import { DEFAULT_PALETTE } from "../types";
-import { isValidHex } from "../color";
 
 // --- encodePaletteToUrl ---
 

@@ -9,7 +9,6 @@ import {
   downloadAsFile,
   type ExportFormat,
 } from "@/lib/export-formats";
-import { encodePaletteToUrl } from "@/lib/url-encoding";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
