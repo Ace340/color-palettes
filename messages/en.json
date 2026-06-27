@@ -80,6 +80,36 @@
       "textSurface": "Text / Surface"
     }
   },
+  "FaqSection": {
+    "title": "Frequently Asked Questions",
+    "description": "Everything you need to know about generating and exporting color palettes",
+    "items": [
+      {
+        "question": "What is a color palette generator?",
+        "answer": "A color palette generator is a tool that creates sets of harmonious colors for design projects. Chromattic builds five-color palettes using color-theory harmonies (complementary, analogous, triadic, and more), AI mood-based generation, and extraction from images — then exports them as CSS variables, a Tailwind config, or JSON."
+      },
+      {
+        "question": "How does the AI color palette generator work?",
+        "answer": "Describe a mood like 'warm sunset' or 'cyberpunk Tokyo' and the AI returns a complete five-color palette. Each color is mapped to a role — primary, secondary, accent, background, and surface — based on role semantics, so the result is immediately usable in a real interface."
+      },
+      {
+        "question": "Can I extract a color palette from an image?",
+        "answer": "Yes. Upload any image and Chromattic analyzes its dominant colors on-device, then smart-maps them to palette roles: the most vivid color becomes the accent, the lightest the background, and so on. You can fine-tune every slot afterward."
+      },
+      {
+        "question": "What formats can I export my palette in?",
+        "answer": "Every palette exports as CSS variables, a Tailwind config snippet, JSON, or a shareable URL. CSS and Tailwind exports are also available as downloadable files for direct use in your project."
+      },
+      {
+        "question": "Is Chromattic free to use?",
+        "answer": "Yes, Chromattic is a free color palette generator that runs entirely in your browser. There's no sign-up, and your palettes are saved locally or shared via URL — nothing is uploaded unless you use the AI or image features."
+      },
+      {
+        "question": "What makes a good color palette?",
+        "answer": "A strong palette balances contrast and harmony: an identity color for primary actions, a supporting secondary, a vivid accent for highlights, plus neutral background and surface tones. Chromattic shows live WCAG contrast ratios so you can verify readability as you design."
+      }
+    ]
+  },
   "ExportPanel": {
     "trigger": "Export",
     "title": "Export Palette",

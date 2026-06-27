@@ -7,7 +7,12 @@ import { notFound } from "next/navigation";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, GOOGLE_SITE_VERIFICATION } from "@/lib/site";
+import {
+  buildOrganizationSchema,
+  buildWebSiteSchema,
+} from "@/lib/structured-data";
+import { JsonLd } from "@/components/seo/json-ld";
 import "../globals.css";
 
 const cabinetGrotesk = localFont({
@@ -66,21 +71,6 @@ export async function generateMetadata({
       template: "%s · Chromattic",
     },
     description,
-    keywords: [
-      "color palette generator",
-      "generador de paletas",
-      "color picker",
-      "design tools",
-      "herramientas de diseño",
-      "color harmony",
-      "WCAG",
-      "UI colors",
-      "Tailwind colors",
-      "CSS variables",
-      "chromattic",
-      "palette maker",
-      "color scheme",
-    ],
     authors: [{ name: "Chromattic" }],
     creator: "Chromattic",
     openGraph: {
@@ -109,6 +99,11 @@ export async function generateMetadata({
         "x-default": "/",
       },
     },
+    // Only emitted when GOOGLE_SITE_VERIFICATION is set, so the tag doesn't
+    // render with an empty value before Search Console is configured.
+    ...(GOOGLE_SITE_VERIFICATION
+      ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+      : {}),
   };
 }
 
@@ -135,6 +130,9 @@ export default async function LocaleLayout({ children, params }: Props) {
         className="min-h-full flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
+        {/* Sitewide structured data — brand + website entity for search engines. */}
+        <JsonLd data={buildOrganizationSchema()} />
+        <JsonLd data={buildWebSiteSchema(locale)} />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
             <TooltipProvider>{children}</TooltipProvider>

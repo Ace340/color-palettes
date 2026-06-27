@@ -80,6 +80,36 @@
       "textSurface": "Texto / Superficie"
     }
   },
+  "FaqSection": {
+    "title": "Preguntas frecuentes",
+    "description": "Todo lo que necesitas saber sobre generar y exportar paletas de colores",
+    "items": [
+      {
+        "question": "¿Qué es un generador de paletas de colores?",
+        "answer": "Un generador de paletas de colores es una herramienta que crea conjuntos de colores armoniosos para proyectos de diseño. Chromattic crea paletas de cinco colores usando armonías de teoría del color (complementario, análogo, triádico y más), generación por estados de ánimo con IA y extracción a partir de imágenes, y luego las exporta como variables CSS, configuración Tailwind o JSON."
+      },
+      {
+        "question": "¿Cómo funciona el generador de paletas con IA?",
+        "answer": "Describe un estado de ánimo como 'atardecer cálido' o 'Tokio cyberpunk' y la IA devuelve una paleta completa de cinco colores. Cada color se asigna a un rol — primario, secundario, acento, fondo y superficie — según la semántica del rol, para que el resultado sea utilizable de inmediato en una interfaz real."
+      },
+      {
+        "question": "¿Puedo extraer una paleta de colores de una imagen?",
+        "answer": "Sí. Sube cualquier imagen y Chromattic analiza sus colores dominantes en tu dispositivo, y luego los asigna a los roles de la paleta: el color más vivo se convierte en el acento, el más claro en el fondo, y así sucesivamente. Puedes ajustar cada color después."
+      },
+      {
+        "question": "¿En qué formatos puedo exportar mi paleta?",
+        "answer": "Cada paleta se exporta como variables CSS, fragmento de configuración Tailwind, JSON o una URL compartible. Las exportaciones de CSS y Tailwind también están disponibles como archivos descargables para usarlos directamente en tu proyecto."
+      },
+      {
+        "question": "¿Es Chromattic gratuito?",
+        "answer": "Sí, Chromattic es un generador de paletas de colores gratuito que funciona completamente en tu navegador. No requiere registro, y tus paletas se guardan localmente o se comparten mediante URL; no se sube nada a menos que uses las funciones de IA o de imagen."
+      },
+      {
+        "question": "¿Qué hace buena a una paleta de colores?",
+        "answer": "Una paleta fuerte equilibra contraste y armonía: un color de identidad para acciones principales, un secundario de apoyo, un acento vivo para destacados, más tonos neutros de fondo y superficie. Chromattic muestra los índices de contraste WCAG en vivo para que verifiques la legibilidad mientras diseñas."
+      }
+    ]
+  },
   "ExportPanel": {
     "trigger": "Exportar",
     "title": "Exportar paleta",

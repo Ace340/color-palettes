@@ -11,3 +11,16 @@
  */
 export const SITE_URL =
   process.env.SITE_URL ?? "https://chromattic.vercel.app";
+
+/** Public brand name. Used by metadata, manifest, and structured data. */
+export const SITE_NAME = "Chromattic";
+
+/**
+ * Google Search Console verification token. When set, `generateMetadata`
+ * emits `<meta name="google-site-verification" content="...">` so the site can
+ * be claimed in Search Console. Server-side only; undefined until configured.
+ *
+ * Get the value from Search Console → Add property → HTML tag method.
+ */
+export const GOOGLE_SITE_VERIFICATION =
+  process.env.GOOGLE_SITE_VERIFICATION;
