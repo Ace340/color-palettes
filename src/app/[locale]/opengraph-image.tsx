@@ -14,8 +14,11 @@ export const contentType = "image/png";
 const SWATCHES = ["#6366F1", "#EC4899", "#F59E0B", "#10B981", "#3B82F6"];
 
 export default async function Image() {
+  // WOFF2 signatures are unsupported by Satori's font parser (it threw
+  // "Unsupported OpenType signature wOF2" — the cause of the 500s this route
+  // served in production). The TTF from the same Fontshare release works.
   const fontData = await readFile(
-    join(process.cwd(), "public/fonts/CabinetGrotesk-ExtraBold.woff2")
+    join(process.cwd(), "public/fonts/CabinetGrotesk-Extrabold.ttf")
   );
 
   return new ImageResponse(
